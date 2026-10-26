@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "froghacker-audit"
+version = "0.1.0"
+description = "蛙客代码安全审计开源版 — regex 危险模式扫描 + AST 污点追踪"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "FrogHacker (wwyhji)" }]
+keywords = ["security", "static-analysis", "audit", "taint", "vulnerability"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []  # 纯标准库，零第三方依赖
+
+[project.urls]
+Homepage = "https://github.com/wwyhji/froghacker-audit"
+
+[tool.setuptools.packages.find]
+include = ["audit*"]
