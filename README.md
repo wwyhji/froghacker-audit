@@ -1,15 +1,35 @@
 # FrogHacker Audit 🔍
 
-代码静态安全审计——给一段代码，快速扫出安全漏洞。
+<div align="center">
+
+**代码静态安全审计（开源版）** — regex 快扫 · AST 污点追踪 · 二进制静态
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](./pyproject.toml)
+[![零依赖](https://img.shields.io/badge/依赖-纯标准库-important.svg)]()
+
+响应时代号召，开源蛙客网络安全分析自动化平台的**代码审计模块**。
+
+</div>
 
 ## 这是什么
 
-「蛙客网络安全分析自动化平台」的代码审计模块开源版。两层检测：
+蛙客（FrogHacker）是攻·防·取三端共生的安全分析自动化平台。本仓库开源的是其中的**代码审计模块**：给一段代码（或二进制），快速扫出安全漏洞。两层检测互补——
 
 - **快层（regex）**：50+ 危险模式规则，秒级扫描
 - **深层（AST taint）**：抽象语法树污点追踪，「用户输入 → 危险 sink」的数据流
 
-纯 Python 标准库（`re` / `ast` / `dataclasses`），零第三方依赖。
+## 🗺️ 蛙客开源仓库导航
+
+蛙客平台按能力拆为五个独立仓库，本仓库是其中的**代码审计模块**：
+
+| 仓库 | 定位 |
+|------|------|
+| [froghacker-defense](https://github.com/wwyhji/froghacker-defense) | 防御端（蓝队）：检测规则 / 蜜罐 / IDS / 防火墙 / 加固 |
+| [froghacker-reveng](https://github.com/wwyhji/froghacker-reveng) | 逆向关联追踪引擎：APK 逆向找 key |
+| [froghacker-ant-swarm](https://github.com/wwyhji/froghacker-ant-swarm) | 蚁群协作调度底座：多 Agent 任务分配 |
+| [froghacker-antihallucination](https://github.com/wwyhji/froghacker-antihallucination) | 算法抗幻觉：确定性验证 + 事实断言裁决 |
+| **[froghacker-audit](https://github.com/wwyhji/froghacker-audit)** | 代码静态安全审计：regex + AST 污点（本仓库） |
 
 ## ✨ 特性
 
@@ -62,18 +82,26 @@ for f in auditor.audit("target_binary"):
 - 符号执行、攻击面映射（挖洞管线）
 - 知识库摄入、自充飞轮（AlphaLoop）
 
+上述方案已申请发明专利（申请日 2026-10-13）。本仓库仅开源业界通用的代码静态审计能力，**不构成**对上述专利技术方案的实施许可。
+
 ## 📁 目录结构
 
 ```
-audit/
-  base.py           regex 扫描器 + 50+ 规则
-  taint.py          AST 污点追踪引擎
-  binary_audit.py   静态二进制审计（import 表 + 硬编码密钥）
-  rules.py          兼容 shim（re-export）
-  deep.py           兼容 shim（re-export）
-tests/              20 个测试
+froghacker-audit/
+├── LICENSE               Apache-2.0
+├── NOTICE                专利保留声明
+├── MANIFEST.md           文件清单与剥离说明
+├── pyproject.toml        打包配置
+├── audit/
+│   ├── __init__.py
+│   ├── base.py           regex 扫描器 + 50+ 规则
+│   ├── taint.py          AST 污点追踪引擎
+│   ├── binary_audit.py   静态二进制审计（import 表 + 硬编码密钥）
+│   ├── rules.py          兼容 shim（re-export）
+│   └── deep.py           兼容 shim（re-export）
+└── tests/                20 个测试
 ```
 
 ## 📄 许可证
 
-Apache-2.0，见 LICENSE。
+Apache License 2.0，© 2026 FrogHacker (wwyhji)。专利保留声明见 [NOTICE](./NOTICE)。
